@@ -8,6 +8,7 @@ import { userRouter } from "./router/userRouter.js";
 import { authRouter } from "./router/authRouter.js";
 import { refreshRouter } from "./router/refreshRouter.js";
 import cookieParser from "cookie-parser";
+import { corsOptions } from "./config/corsConfig.js";
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 4300;
 const app = express();
 
 // middleware to process cors requests
-app.use(cors());
+app.use(cors(corsOptions));
 // middleware to process form data
 app.use(express.urlencoded({ extended: false }));
 // middleware to process json content
