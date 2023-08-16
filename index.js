@@ -4,6 +4,10 @@ import { DbConnection } from "./config/databaseConnection.js";
 import cors from "cors";
 import mongoose from "mongoose";
 import { todoRouter } from "./router/todoRoutes.js";
+import { userRouter } from "./router/userRouter.js";
+import { authRouter } from "./router/authRouter.js";
+import { refreshRouter } from "./router/refreshRouter.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -19,9 +23,14 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 // middleware to process json content
 app.use(express.json());
+// middleware to parse cookies
+app.use(cookieParser());
 
 // configure routes
 app.use("/api/todos", todoRouter);
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/refresh", refreshRouter);
 
 mongoose.connection.once("open", (err) => {
 	if (err) {

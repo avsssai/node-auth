@@ -34,7 +34,6 @@ export const editTodo = async (req, res, next) => {
 		const newTitle = title ? title : itemToEdit.title;
 		const newCompleted =
 			completed !== undefined ? completed : itemToEdit.completed;
-		console.log(newTitle, completed, newCompleted);
 		await TodoModel.updateOne(
 			{ _id: id },
 			{ title: newTitle, completed: newCompleted }
